@@ -4,11 +4,53 @@ sources:
   - name: gz_raw_data
     schema: gz_raw_data
     tables:
+
+      # Informations de la table PRODUCT.
       - name: product
         identifier: raw_gz_product
+        columns:
+          - name: products_id
+            description: Clé primaire de la table.
+          - name: purchase_price
+            description: prix d'achat.
 
+      # Informations de la table SALES.
       - name: sales
         identifier: raw_gz_sales
+        columns:
+          - name: date_date
+            description: date d'achat
+          - name: orders_id
+            description: id de la commande.
+          - name: pdt_id
+            description: id du produit.
+          - name: revenue
+            description: revenue.
+          - name: quantity
+            description: quantité.
+        tests:
+          - unique:
+              column_name: "(orders_id || '-' || products_id)"
+        ##OR##
+        # - dbt_utils.unique_combination_of_columns:
+        #     combination_of_columns:
+        #       - orders_id
+        #       - products_id
 
+      # Informations de la table SHIP.
       - name: ship
         identifier: raw_gz_ship
+        columns:
+          - name: orders_id
+            description: id de la commande.
+          - name: shipping_fee
+            description: ???
+          - name: log_cost
+            description: ???
+          - name: ship_cost
+            description: ???
+
+
+freshness:
+  warn_after: {count:90, period: day}
+loaded_at_field: "CAST(date_date AS TIMESTAMP)"
