@@ -3,7 +3,7 @@
 
 SELECT 
 
-    -- Récupération des colonnes.
+    -- Séléction des colonnes.
     products_id, 
     date_date, 
     orders_id,

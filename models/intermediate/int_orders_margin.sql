@@ -14,3 +14,4 @@ GROUP BY orders_id, date_date
 
 -- On ordonne la table par 'DESC'.
 ORDER BY orders_id DESC
+
