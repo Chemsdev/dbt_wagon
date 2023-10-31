@@ -6,15 +6,18 @@ sources:
     tables:
 
       # Table PRODUCT.
+      # ================================================>
       - name: product
         identifier: raw_gz_product
         columns:
-          - name: products_id
+          - name: pdt_id
             description: Clé primaire de la table.
-          - name: purchase_price
+          - name: purchSE_PRICE
             description: prix d'achat.
+      # ================================================>
 
       # Table SALES.
+      # ================================================>
       - name: sales
         identifier: raw_gz_sales
         columns:
@@ -30,8 +33,7 @@ sources:
             description: quantité.
         tests:
           - unique:
-              column_name: "(orders_id || '-' || products_id)"
-
+              column_name: "(orders_id || '-' || pdt_id)"
 
         # Test de fraicheur.
         freshness:
@@ -39,19 +41,24 @@ sources:
             count: 90
             period: day
         loaded_at_field: "CAST(date_date AS TIMESTAMP)"
+      # ================================================>
 
       # Table SHIP.
+      # ================================================>
       - name: ship
         identifier: raw_gz_ship
         columns:
           - name: orders_id
             description: id de la commande.
           - name: shipping_fee
-            description: ???
+            description: ...
           - name: log_cost
-            description: ???
+            description: ...
           - name: ship_cost
-            description: ???
+            description: ...
+      # ================================================>
+
+
 
 # Test de clé primaire de la table int_sales_margin.
 models:
@@ -68,3 +75,4 @@ models:
             - date_date
             - revenue
             - quantity
+
